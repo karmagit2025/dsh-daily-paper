@@ -19,7 +19,8 @@
     "scripts",
     "examples",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "SETUP.md"
   ],
   "dsh": {
     "bundle": {
