@@ -1,8 +1,8 @@
 {
   "name": "dsh-daily-paper",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
-  "description": "UP 日报：每天一份的私人日报，左侧导航栏/设置里按天翻看 B站 UP 主的新内容，同页配置账号与关注列表。",
+  "description": "UP 日报：每天一份的私人日报（B站 + 即刻），杂志版式、按信源分栏、同页配置，自带采集脚本。",
   "exports": {
     ".": "./index.js",
     "./client": "./client.js",

@@ -51,10 +51,19 @@ cd <插件目录> && python3 scripts/jike_fetch.py --output /tmp/jike.json
 5. 用 scripts/digest.py 渲染整期，推到用户指定的地方（飞书/邮件/不发）
 ```
 
-## 5. 告诉用户 B站 怎么办
+## 5. 配 B站（可选，但大多数人都要）
 
-插件不自带 B站 采集。要接的话，让用户提供一个能产出同格式 JSON 的采集器，
-或者按 README 的「采集器」一节自己搭。**不要**替用户找 cookie、也不要代他登录。
+1. 让用户自己从浏览器复制 `SESSDATA` / `bili_jct` / `DedeUserID`，填进插件「配置」页。
+   **不要**替用户登录、也不要索取账号密码。
+2. 让用户给出想跟的 UP 主 uid（`space.bilibili.com/<uid>`）。
+3. 先验证抓取能跑通：
+
+   ```bash
+   cd <插件目录> && python3 scripts/bili/fetch_videos_v2.py --output /tmp/bili.json
+   ```
+
+   报 `-101` / `-352` 就是 cookie 失效，让用户重新复制，不要反复重试。
+4. 没装 `openai-whisper` / `ffmpeg` 时，先加 `BILI_TRANSCRIBE=0` 跑通（只取字幕），再考虑装转录。
 
 ## 6. 收尾
 

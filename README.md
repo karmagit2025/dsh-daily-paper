@@ -87,21 +87,46 @@ cp examples/sample-issue.json ~/.dsh/daily-paper/issues/2026-01-01.json
 
 只有 `items[].title` 是必填，其余缺了就不渲染对应部分。
 
-## 采集器
+## 采集器（两个都自带）
 
-插件自带 **即刻** 采集器（只读公开内容，不需要登录）：
+### 即刻（无需登录）
 
 ```bash
-cd <插件目录>
 python3 scripts/jike_fetch.py --output /tmp/jike.json
-python3 scripts/publish.py --source jike --items /tmp/jike.json
+python3 scripts/publish.py --source jike --items /tmp/jike.json   # jike_fetch 的输出已经是 section 形状
 ```
 
-在「配置」页填 5–10 个圈子 id（`web.okjike.com/topic/<id>`）和几条兴趣，采集后会由 agent 按兴趣择稿，而不是把动态原样搬过来。
+配置页填 5–10 个圈子 id（`web.okjike.com/topic/<id>`）和几条兴趣。采集后可以由 agent 按兴趣择稿，
+也可以直接把原始条目出版（脚本已经排好版）。
 
-**B站** 需要另外的采集器（拉 UP 主动态、取字幕或转录、生成摘要）。这篇 README 不打包它，因为每个租户的 cookie 和转写环境不同；只要你的采集器能产出上面那种 JSON，就能接进来。
+### B站（需要你的登录态）
 
-`scripts/publish.py` 负责把一栏合并进当期（同 source 覆盖、其它栏不动），`scripts/digest.py` 负责把整期渲染成 Markdown 发到飞书或别处。
+```bash
+# 1) 抓取：默认读 ~/.dsh/daily-paper/config.json
+python3 scripts/bili/fetch_videos_v2.py --output /tmp/bili.json
+
+# 2) 转成版式（不调用模型，用转录或简介做要点）
+python3 scripts/bili_to_section.py --input /tmp/bili.json --output /tmp/bili_section.json
+
+# 3) 出版
+python3 scripts/publish.py --source bilibili --items /tmp/bili_section.json
+```
+
+依赖：
+
+| 依赖 | 必需？ | 说明 |
+|---|---|---|
+| Python 3.8+ | 是 | 只用标准库 |
+| B站 cookie | 是 | 配置页填 `SESSDATA` / `bili_jct` / `DedeUserID` |
+| ffmpeg | 转录时需要 | `brew install ffmpeg` |
+| openai-whisper | 转录时需要 | `pip install openai-whisper`，没装就设 `BILI_TRANSCRIBE=0` |
+
+- 短视频（<3 分钟）用标题 + 简介；长视频优先取 B站 AI 字幕，取不到才下载音频转录。
+- `BILI_TRANSCRIBE=0` 可完全关闭音频转录（只取字幕，速度快很多）。
+- 抓取结果、音频、临时文件都在 `~/.dsh/daily-paper/bili/`，不会写进插件目录。
+
+想让 agent 写更好的摘要（核心观点 / 论据 / 可执行），把 `/tmp/bili.json` 交给它，让它产出
+`{"source":"bilibili","label":"B站","items":[…]}` 再 publish。
 
 ## 配置
 
