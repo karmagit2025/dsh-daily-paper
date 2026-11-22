@@ -1,0 +1,9 @@
+# dsh-daily-paper —— 插件自带的挂载声明。
+# dataDir 留空 = 用本机 ~/.dsh/daily-paper（期文件 + 个人配置）。
+# 期文件怎么跨机器：仓库里的 daily-paper/issues 由 sync 脚本镜像到本机这个目录，
+# 所以另一台机器只要 clone + 自动同步，就能读到同一份报纸（它自己不跑采集）。
+- insert:
+    - id: daily-paper
+      name: dsh-daily-paper
+      config:
+        dataDir: ""

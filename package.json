@@ -1,0 +1,55 @@
+{
+  "name": "dsh-daily-paper",
+  "version": "0.2.0",
+  "type": "module",
+  "description": "UP 日报：每天一份的私人日报，左侧导航栏/设置里按天翻看 B站 UP 主的新内容，同页配置账号与关注列表。",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "docs",
+    "icon.svg",
+    "scripts",
+    "examples",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings"
+      ]
+    }
+  },
+  "license": "MIT",
+  "author": "骆晓阳",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karmagit2025/dsh-daily-paper.git"
+  },
+  "homepage": "https://github.com/karmagit2025/dsh-daily-paper",
+  "bugs": {
+    "url": "https://github.com/karmagit2025/dsh-daily-paper/issues"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "daily",
+    "rss",
+    "bilibili",
+    "jike"
+  ]
+}

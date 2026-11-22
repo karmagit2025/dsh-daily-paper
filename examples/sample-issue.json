@@ -1,0 +1,41 @@
+{
+  "date": "2026-01-01",
+  "lead": "示例期：B站与即刻各一栏，用来预览版式；真实内容由你的采集器产出。",
+  "generatedAt": "2026-01-01T09:00:00+08:00",
+  "sections": [
+    {
+      "source": "bilibili",
+      "label": "B站",
+      "items": [
+        {
+          "title": "示例：一条 B站 视频的标题",
+          "author": "某 UP 主",
+          "url": "https://www.bilibili.com/video/BV1xx411c7mD",
+          "duration": "12:34",
+          "publishedAt": "2026-01-01T08:00:00+08:00",
+          "summary": [
+            "要点一：这条视频想解决什么问题。",
+            "要点二：它的关键论据或数据。"
+          ],
+          "todo": ["看完可以做的一件事。"]
+        }
+      ]
+    },
+    {
+      "source": "jike",
+      "label": "即刻",
+      "note": "示例编者按：3 个圈子在聊同一件事。",
+      "items": [
+        {
+          "title": "示例：一条即刻动态的标题",
+          "author": "某人",
+          "topic": "AI探索站",
+          "url": "https://m.okjike.com/originalPosts/0000",
+          "publishedAt": "2026-01-01T07:30:00+08:00",
+          "summary": ["这条为什么值得看，而不是复述标题。"],
+          "todo": []
+        }
+      ]
+    }
+  ]
+}
